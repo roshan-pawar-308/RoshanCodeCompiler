@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Tutorials - CodeLearnGrow</title>
+    <style> .modal { display: none; } </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+             <a href="index.html" class="logo">CodeLearnGrow</a>
+             <ul>
+                <li><a href="index.html">Home</a></li>
+                <li id="nav-compiler" class="hidden"><a href="compiler.html">Compiler</a></li>
+                <li id="nav-dashboard" class="hidden"><a href="dashboard.html">Dashboard</a></li>
+                <li id="nav-tutorials" class="hidden"><a href="tutorials.html" class="active">Tutorials</a></li>
+                <li id="nav-challenges" class="hidden"><a href="challenges.html">Challenges</a></li>
+                <li id="nav-snippets" class="hidden"><a href="snippets.html">My Snippets</a></li>
+                <li id="nav-login"><a href="login.html">Login</a></li>
+                <li id="nav-register"><a href="register.html">Register</a></li>
+            </ul>
+             <div id="user-info" class="hidden">
+                Welcome, <span id="username-display"></span>! <button id="logout-button">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Tutorials</h1>
+        <p>Browse our collection of tutorials to learn new programming concepts. (Content is static placeholder).</p>
+
+        <div id="tutorial-list" class="card-container mt-2">
+            <div class="card">
+                <h3>Introduction to Python Variables</h3>
+                 <span class="language-tag">Python</span>
+                <p>Learn the basics of declaring and using variables in Python.</p>
+                <div class="card-actions">
+                    <a href="https://docs.python.org/3/tutorial/index.html" class="button" >Read More</a>
+                </div>
+            </div>
+             <div class="card">
+                <h3>JavaScript Promises Explained</h3>
+                <span class="language-tag">JavaScript</span>
+                <p>Understand asynchronous operations using Promises in JavaScript.</p>
+                 <div class="card-actions">
+                    <a href="https://www.javascripttutorial.net/" class="button"  >Read More</a>
+                </div>
+            </div>
+             <div class="card">
+                <h3>C++ Pointers Fundamentals</h3>
+                 <span class="language-tag">C++</span>
+                <p>Get started with pointers, memory addresses, and dereferencing.</p>
+                 <div class="card-actions">
+                    <a href="https://cplusplus.com/doc/tutorial/" class="button" >Read More</a>
+                </div>
+            </div>
+             </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

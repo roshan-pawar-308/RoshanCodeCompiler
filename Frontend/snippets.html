@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <title>My Code Snippets - CodeLearnGrow</title>
+    <style>
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 2000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto; /* 10% from the top and centered */
+            padding: 30px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+            max-width: 800px; /* Max width */
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 25px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        .modal-close {
+            color: #aaa;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .modal-close:hover,
+        .modal-close:focus {
+            color: black;
+            text-decoration: none;
+        }
+        #modal-code { /* Style modal textarea */
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            background-color: #2d2d2d; color: #f0f0f0; border: 1px solid #444;
+            min-height: 250px; width: 100%; padding: 10px; border-radius: 5px;
+            margin-top: 10px;
+        }
+        .snippet-card {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .snippet-card:hover {
+            background-color: #eee;
+        }
+        .snippet-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .snippet-language {
+            font-size: 0.9em;
+            color: #777;
+        }
+        .snippet-description {
+            font-size: 0.95em;
+            color: #555;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+             <a href="index.html" class="logo">CodeLearnGrow</a>
+             <ul>
+                 <li><a href="index.html">Home</a></li>
+                 <li id="nav-compiler" class="hidden"><a href="compiler.html">Compiler</a></li>
+                 <li id="nav-dashboard" class="hidden"><a href="dashboard.html">Dashboard</a></li>
+                 <li id="nav-tutorials" class="hidden"><a href="tutorials.html">Tutorials</a></li>
+                 <li id="nav-challenges" class="hidden"><a href="challenges.html">Challenges</a></li>
+                 <li id="nav-snippets" class="hidden"><a href="snippets.html" class="active">My Snippets</a></li>
+                 <li id="nav-login"><a href="login.html">Login</a></li>
+                 <li id="nav-register"><a href="register.html">Register</a></li>
+             </ul>
+             <div id="user-info" class="hidden">
+                 Welcome, <span id="username-display"></span>! <button id="logout-button">Logout</button>
+             </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>My Code Snippets</h1>
+         <div id="snippet-message-area" class="message hidden mb-1"></div>
+        <p>Manage your saved code snippets. Add new snippets from the <a href="compiler.html">Compiler</a> page.</p>
+
+         <div id="snippet-list" class="card-container mt-2">
+             <p id="loading-snippets" class="info-message">Loading your snippets...</p>
+         </div>
+    </div>
+
+    <div id="snippet-modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h2 id="modal-title">View Snippet</h2>
+            <div>
+                <strong>Title:</strong> <span id="modal-snippet-title"></span>
+            </div>
+            <div>
+                <strong>Language:</strong> <span id="modal-language"></span>
+            </div>
+            <div>
+                <strong>Description:</strong> <pre id="modal-description" style="white-space: pre-wrap;"></pre>
+            </div>
+            <div>
+                <strong>Code:</strong>
+                <textarea id="modal-code" readonly></textarea>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/snippets.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

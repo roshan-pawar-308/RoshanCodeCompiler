@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Attempt Challenge - CodeLearnGrow</title>
+     <style>
+        .modal { display: none; }
+        /* Optional: Specific layout for this page if needed */
+        .challenge-layout {
+            display: flex;
+            gap: 30px;
+        }
+        .challenge-description {
+            flex: 1; /* Takes up space */
+            max-width: 40%; /* Limit width */
+            border-right: 1px solid var(--grey-color);
+            padding-right: 30px;
+             max-height: 80vh; /* Limit height */
+            overflow-y: auto; /* Allow scrolling */
+        }
+        .challenge-compiler {
+            flex: 2; /* Takes more space */
+        }
+         @media (max-width: 992px) {
+            .challenge-layout {
+                flex-direction: column;
+            }
+             .challenge-description {
+                max-width: 100%;
+                border-right: none;
+                padding-right: 0;
+                border-bottom: 1px solid var(--grey-color);
+                padding-bottom: 20px;
+                margin-bottom: 20px;
+                 max-height: 40vh; /* Adjust height */
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">CodeLearnGrow</a>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+               <li id="nav-compiler" class="hidden"><a href="compiler.html">Compiler</a></li>
+               <li id="nav-dashboard" class="hidden"><a href="dashboard.html">Dashboard</a></li>
+               <li id="nav-tutorials" class="hidden"><a href="tutorials.html">Tutorials</a></li>
+               <li id="nav-challenges" class="hidden"><a href="challenges.html" class="active">Challenges</a></li>
+               <li id="nav-snippets" class="hidden"><a href="snippets.html">My Snippets</a></li>
+               <li id="nav-login"><a href="login.html">Login</a></li>
+               <li id="nav-register"><a href="register.html">Register</a></li>
+           </ul>
+            <div id="user-info" class="hidden">
+               Welcome, <span id="username-display"></span>! <button id="logout-button">Logout</button>
+           </div>
+       </div>
+   </nav>
+
+   <div class="container">
+    <h1 id="challenge-title">Loading Challenge...</h1>
+     <div id="challenge-message-area" class="message hidden mb-2"></div> <div class="challenge-layout">
+        <div class="challenge-description">
+            <h2>Description</h2>
+            <div id="challenge-description-content">
+                <p>Loading challenge details...</p>
+            </div>
+             <h3 class="mt-2">Examples</h3>
+             <pre id="challenge-examples">Loading...</pre>
+             <h3 class="mt-2">Constraints</h3>
+             <pre id="challenge-constraints">Loading...</pre>
+        </div>
+
+        <div class="challenge-compiler">
+            <h2>Your Solution</h2>
+             <form id="compiler-form"> <div>
+                    <label for="language">Select Language:</label>
+                    <select id="language">
+                        <option value="python">Python</option>
+                        <option value="javascript">JavaScript (Node.js)</option>
+                        <option value="java">Java</option>
+                        <option value="c++">C++</option>
+                        <option value="c">C</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="code">Code Editor:</label>
+                    <textarea id="code" rows="20" placeholder="// Start coding your solution..."></textarea>
+                </div>
+                 <div>
+                    <button type="button" id="run-tests-button" class="button button-primary" style="margin-right: 10px;">Run Tests</button>
+                    <button type="button" id="submit-button" class="button button-secondary">Submit Solution</button>
+                 </div>
+            </form>
+
+            <div class="output-section mt-2">
+                <h2>Results / Test Cases</h2>
+                <pre id="status">Status: Ready</pre>
+                <pre id="compiler-message">Compiler Messages: N/A</pre>
+                <h3>Test Case Output:</h3>
+                <pre id="output">[Test results will appear here]</pre>
+                <h3>Error Output:</h3>
+                <pre id="error-output">[Errors will appear here]</pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/attempt-challenge.js"></script>
+<script src="js/main.js"></script>
+<script src="js/compiler-utils.js"></script>
+</body>
+</html>

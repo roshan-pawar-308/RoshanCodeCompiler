@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Code Compiler - CodeLearnGrow</title>
+     <style> .modal { display: none; } </style>
+    </head>
+<body>
+    <nav>
+        <div class="nav-container">
+             <a href="index.html" class="logo">CodeLearnGrow</a>
+             <ul>
+                 <li><a href="index.html">Home</a></li>
+                 <li id="nav-compiler"><a href="compiler.html" class="active">Compiler</a></li>
+                 <li id="nav-dashboard" class="hidden"><a href="dashboard.html">Dashboard</a></li>
+                 <li id="nav-tutorials" class="hidden"><a href="tutorials.html">Tutorials</a></li>
+                 <li id="nav-challenges" class="hidden"><a href="challenges.html">Challenges</a></li>
+                 <li id="nav-snippets" class="hidden"><a href="snippets.html">My Snippets</a></li>
+                 <li id="nav-login"><a href="login.html">Login</a></li>
+                 <li id="nav-register"><a href="register.html">Register</a></li>
+             </ul>
+             <div id="user-info" class="hidden">
+                 Welcome, <span id="username-display"></span>! <button id="logout-button">Logout</button>
+             </div>
+        </div>
+    </nav>
+
+    <div class="container compiler-container">
+        <h1>Code Compiler</h1>
+        <div id="compiler-message-area" class="message hidden"></div>
+        <form id="compiler-form">
+            <div>
+                <label for="language">Select Language:</label>
+                <select id="language">
+                    <option value="python">Python</option>
+                    <option value="javascript">JavaScript (Node.js)</option>
+                    <option value="java">Java</option>
+                    <option value="c++">C++</option>
+                    <option value="c">C</option>
+                </select>
+            </div>
+            <div>
+                <label for="code">Source Code:</label>
+                <textarea id="code" rows="20" placeholder="// Enter your code here..."></textarea>
+            </div>
+            <div>
+                <label for="stdin">Standard Input (Optional):</label>
+                <textarea id="stdin" rows="5" placeholder="Input data for your program..."></textarea>
+            </div>
+            <div>
+                <button type="button" id="run-button" class="button button-primary">Run Code</button>
+                <button type="button" id="save-snippet-button" class="button button-secondary hidden">Save Snippet</button>
+            </div>
+        </form>
+
+        <div class="output-section">
+            <h2>Results</h2>
+            <pre id="status">Status: Ready</pre>
+            <pre id="compiler-message">Compiler Messages: N/A</pre>
+            <h3>Standard Error:</h3>
+            <pre id="error-output">[Errors will appear here]</pre>
+            <h3>Standard Output:</h3>
+            <pre id="output">[Output will appear here]</pre>
+        </div>
+    </div>
+
+    <script>
+    // --- Combined main.js and compiler.js logic ---
+
+    // --- Storage Helper Functions ---
+    const SNIPPETS_STORAGE_KEY = 'userSnippets';
+
+    function getSnippetsFromStorage() {
+        try {
+            const snippetsJson = localStorage.getItem(SNIPPETS_STORAGE_KEY);
+            return snippetsJson ? JSON.parse(snippetsJson) : [];
+        } catch (e) {
+            console.error("Error parsing snippets from localStorage:", e);
+            return [];
+        }
+    }
+
+    function saveSnippetsToStorage(snippets) {
+        try {
+            localStorage.setItem(SNIPPETS_STORAGE_KEY, JSON.stringify(snippets));
+        } catch (e) {
+            console.error("Error saving snippets to localStorage:", e);
+            // We might display this error using showCompilerMessage if called from snippet saving context
+            // For now, just log it.
+        }
+    }
+    // --- End Storage Helpers ---
+
+    // --- DOM Ready ---
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // --- Element References ---
+        const navCompilerLink = document.getElementById('nav-compiler');
+        const navDashboardLink = document.getElementById('nav-dashboard');
+        const navTutorialsLink = document.getElementById('nav-tutorials');
+        const navChallengesLink = document.getElementById('nav-challenges');
+        const navSnippetsLink = document.getElementById('nav-snippets');
+        const navLoginLink = document.getElementById('nav-login');
+        const navRegisterLink = document.getElementById('nav-register');
+        const userInfoDisplay = document.getElementById('user-info');
+        const usernameDisplay = document.getElementById('username-display');
+        const logoutButton = document.getElementById('logout-button');
+        const saveSnippetButton = document.getElementById('save-snippet-button');
+        const runButton = document.getElementById('run-button');
+        const languageSelect = document.getElementById('language');
+        const codeTextArea = document.getElementById('code');
+        const stdinTextArea = document.getElementById('stdin');
+        const outputPre = document.getElementById('output');
+        const errorOutputPre = document.getElementById('error-output');
+        const statusPre = document.getElementById('status');
+        const compilerMessagePre = document.getElementById('compiler-message');
+        const messageArea = document.getElementById('compiler-message-area');
+
+        // --- Authentication / Nav Update ---
+        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        const username = localStorage.getItem('username');
+
+        if (isLoggedIn) {
+            // Show user-specific nav items
+            if (navCompilerLink) navCompilerLink.classList.remove('hidden');
+            if (navDashboardLink) navDashboardLink.classList.remove('hidden');
+            if (navTutorialsLink) navTutorialsLink.classList.remove('hidden');
+            if (navChallengesLink) navChallengesLink.classList.remove('hidden');
+            if (navSnippetsLink) navSnippetsLink.classList.remove('hidden');
+            if (userInfoDisplay) userInfoDisplay.classList.remove('hidden');
+            if (navLoginLink) navLoginLink.classList.add('hidden');
+            if (navRegisterLink) navRegisterLink.classList.add('hidden');
+            if (usernameDisplay) usernameDisplay.textContent = username || 'User';
+            if (saveSnippetButton) saveSnippetButton.classList.remove('hidden'); // Show save button
+
+        } else {
+            // Hide user-specific nav items
+            if (navDashboardLink) navDashboardLink.classList.add('hidden');
+            if (navTutorialsLink) navTutorialsLink.classList.add('hidden');
+            if (navChallengesLink) navChallengesLink.classList.add('hidden');
+            if (navSnippetsLink) navSnippetsLink.classList.add('hidden');
+            if (userInfoDisplay) userInfoDisplay.classList.add('hidden');
+            if (navLoginLink) navLoginLink.classList.remove('hidden');
+            if (navRegisterLink) navRegisterLink.classList.remove('hidden');
+            if (saveSnippetButton) saveSnippetButton.classList.add('hidden'); // Hide save button
+        }
+
+        // --- Logout ---
+        if (logoutButton) {
+            logoutButton.addEventListener('click', () => {
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('username');
+                showCompilerMessage('Logged out successfully.', false);
+                window.location.href = 'index.html'; // Or login.html
+            });
+        }
+
+
+        // --- Compiler UI Feedback ---
+        function showCompilerMessage(msg, isError = false) {
+            if (!messageArea) return;
+            messageArea.textContent = msg;
+            messageArea.className = isError ? 'message error-message' : 'message success-message';
+        }
+
+        function clearCompilerMessage() {
+            if (!messageArea) return;
+            messageArea.textContent = '';
+            messageArea.className = 'message hidden';
+        }
+
+        // Simple HTML escaping helper
+        function escapeHTML(str) {
+            if (!str) return '';
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        // --- Event Handlers ---
+
+        /**
+         * Handles the "Run Code" button click. Sends code to the backend.
+         */
+        async function handleRunCode() {
+            clearCompilerMessage();
+            const language = languageSelect.value;
+            const code = codeTextArea.value;
+            const stdin = stdinTextArea.value;
+
+            if (!code.trim()) {
+                showCompilerMessage("Cannot run empty code.", true);
+                return;
+            }
+
+            // Update UI to show "Running" state
+            outputPre.textContent = '';
+            errorOutputPre.textContent = '';
+            compilerMessagePre.textContent = 'Compiler Messages: N/A';
+            statusPre.textContent = 'Status: Running...';
+            if (runButton) runButton.disabled = true;
+            if (saveSnippetButton) saveSnippetButton.disabled = true;
+
+            console.log('Sending code to backend:', { language, codeLength: code.length, stdinLength: stdin.length });
+
+            // --- <<< ACTUAL FETCH CALL TO BACKEND >>> ---
+            try {
+                const response = await fetch('http://localhost:3000/execute', { // URL of your backend server
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        language: language,
+                        code: code,
+                        stdin: stdin
+                    }),
+                });
+
+                // Check if the server responded successfully (status code 2xx)
+                if (!response.ok) {
+                   // Try to get error message from backend response body
+                    let errorData;
+                    try {
+                        errorData = await response.json();
+                    } catch(e) {
+                        errorData = { error: 'Unknown server error', details: await response.text() };
+                    }
+                     throw new Error(`Server error: ${response.status} ${response.statusText}. ${errorData?.error || ''} ${errorData?.details || ''}`);
+                }
+
+                const result = await response.json(); // Parse the JSON response from the backend
+                console.log('Received result from backend:', result);
+                displayResults(result); // Display the actual results
+
+            } catch (error) {
+                console.error('Error during code execution:', error);
+                // Display a generic error and the technical details in the output section
+                displayResults({
+                    stdout: '',
+                    stderr: `Frontend Error: Failed to communicate with backend or process response.\n${error.message}`,
+                    compile_output: '',
+                    status: { description: "Network/Client Error" },
+                    time: null,
+                    message: 'Execution failed due to a client-side or network issue.'
+                });
+                showCompilerMessage('An error occurred while trying to run the code.', true);
+            } finally {
+                // Re-enable buttons regardless of success or failure
+                if (runButton) runButton.disabled = false;
+                if (saveSnippetButton) saveSnippetButton.disabled = false;
+            }
+            // --- <<< END OF FETCH CALL >>> ---
+        }
+
+        /**
+         * Handles the "Save Snippet" button click. Saves to localStorage.
+         */
+        function handleSaveSnippet() {
+            clearCompilerMessage();
+            const language = languageSelect.value;
+            const code = codeTextArea.value;
+
+            if (!code.trim()) {
+                showCompilerMessage("Cannot save empty code.", true);
+                return;
+            }
+
+            const title = prompt("Enter a title for this snippet:");
+            if (title === null) return; // User cancelled
+            if (!title.trim()) {
+                showCompilerMessage("Snippet title cannot be empty.", true);
+                return;
+            }
+
+            const description = prompt("Enter an optional description:");
+            // Handle cancel on description prompt
+
+            const newSnippet = {
+                id: Date.now(),
+                title: title.trim(),
+                language: language,
+                code: code,
+                description: description === null ? "" : description.trim(),
+                createdAt: new Date().toISOString()
+            };
+
+            try {
+                const snippets = getSnippetsFromStorage();
+                snippets.push(newSnippet);
+                saveSnippetsToStorage(snippets);
+                console.log('Snippet saved to localStorage:', newSnippet);
+                showCompilerMessage(`Snippet "${escapeHTML(newSnippet.title)}" saved successfully! View it on the 'My Snippets' page.`, false);
+
+                // Optional: Clear fields after saving
+                // codeTextArea.value = '';
+                // stdinTextArea.value = '';
+
+            } catch (error) {
+                console.error("Error saving snippet:", error);
+                 // Use showCompilerMessage for user feedback if saveSnippetsToStorage doesn't already
+                showCompilerMessage("Failed to save snippet due to a storage error.", true);
+            }
+        }
+
+        /**
+         * Updates the output/results section of the UI based on backend response.
+         * @param {object} result - The result object from the backend.
+         */
+        function displayResults(result) {
+            outputPre.textContent = result.stdout || '[No standard output]';
+            errorOutputPre.textContent = result.stderr || '[No standard error]';
+            compilerMessagePre.textContent = `Compiler Messages: ${result.compile_output || 'N/A'}`;
+
+            // Optionally add the backend's message if it exists
+            if (result.message) {
+                compilerMessagePre.textContent += `\nBackend Message: ${result.message}`;
+            }
+
+            const statusDesc = result.status?.description || 'Unknown Status';
+            const timeTaken = result.time !== null && result.time !== undefined ? `${result.time}s` : 'N/A';
+            const memoryUsed = result.memory ? `${result.memory} KB` : 'N/A'; // If backend provides memory
+
+            statusPre.textContent = `Status: ${statusDesc} | Time: ${timeTaken} | Memory: ${memoryUsed}`;
+
+             // Give visual indication based on status
+            if (statusDesc.includes("Error") || statusDesc.includes("Failed")) {
+                statusPre.style.color = "#e74c3c"; // Red
+            } else if (statusDesc === "Accepted") {
+                statusPre.style.color = "#2ecc71"; // Green
+            } else {
+                statusPre.style.color = "#f39c12"; // Orange for others like Time Limit, etc.
+            }
+        }
+
+
+        // --- Attach Event Listeners ---
+        if (runButton) {
+            runButton.addEventListener('click', handleRunCode);
+        } else {
+            console.error("Run button not found!");
+        }
+
+        if (saveSnippetButton) {
+            // Check if user is logged in before adding listener (already handled by hidden class)
+            saveSnippetButton.addEventListener('click', handleSaveSnippet);
+        }
+        // No need for an error log if the button isn't found when logged out
+
+    }); // End DOMContentLoaded
+    </script>
+    <script src="js/main.js"></script>
+</body>
+</html>

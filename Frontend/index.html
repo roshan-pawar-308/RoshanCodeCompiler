@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to CodeLearnGrow</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">CodeLearnGrow</a>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li id="nav-compiler" class="hidden"><a href="compiler.html">Compiler</a></li>
+                <li id="nav-dashboard" class="hidden"><a href="dashboard.html">Dashboard</a></li>
+                <li id="nav-tutorials" class="hidden"><a href="tutorials.html">Tutorials</a></li>
+                <li id="nav-challenges" class="hidden"><a href="challenges.html">Challenges</a></li>
+                <li id="nav-snippets" class="hidden"><a href="snippets.html">My Snippets</a></li>
+    
+                <li id="nav-login"><a href="login.html">Login</a></li>
+                <li id="nav-register"><a href="register.html">Register</a></li>
+            </ul>
+            <div id="user-info" class="hidden">
+                Welcome, <span id="username-display"></span>!
+                <button id="logout-button">Logout</button>
+            </div>
+        </div>
+    </nav>
+    <div class="container text-center">
+        <h1>🚀 Welcome to CodeLearnGrow! 🚀</h1>
+        <p style="font-size: 1.2em; color: #555;">Your one-stop platform to Learn, Practice, Compile, and Organize code effectively.</p>
+        <p>Dive into our <a href="compiler.html">Compiler</a>, explore <a href="tutorials.html">Tutorials</a>, tackle <a href="challenges.html">Challenges</a>, or <a href="register.html">Register</a> to save your progress and snippets!</p>
+        <div class="mt-2">
+            <a href="compiler.html" class="button button-primary" style="margin-right: 10px;">Try the Compiler</a>
+            <a href="register.html" class="button">Get Started</a>
+        </div>
+
+        <div id="guest-cta" class="hidden">
+            <p>Please <a href="login.html">Login</a> or <a href="register.html">Register</a> to access all features.</p>
+        </div>
+        <div id="user-cta" class="hidden">
+            <p>Ready to code? Jump into the <a href="compiler.html">Compiler</a> or explore your <a href="dashboard.html">Dashboard</a>.</p>
+             <a href="dashboard.html" class="button button-primary">Go to Dashboard</a>
+        </div>
+    </div>
+    <script src="js/main.js"></script>
+</body>
+</html>

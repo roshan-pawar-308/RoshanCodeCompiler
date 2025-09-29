@@ -1,0 +1,622 @@
+/* --- Variables --- */
+:root {
+    --primary-color: #3498db; /* A nice blue */
+    --secondary-color: #2ecc71; /* Green for success/buttons */
+    --danger-color: #e74c3c; /* Red for errors */
+    --light-color: #f4f7f6;
+    --dark-color: #2c3e50; /* Dark blue/grey */
+    --grey-color: #bdc3c7;
+    --white-color: #ffffff;
+    --font-family: 'Poppins', sans-serif;
+    --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    --border-radius: 8px;
+}
+
+/* --- General Reset & Body --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    line-height: 1.7;
+    background-color: var(--light-color);
+    color: var(--dark-color);
+    padding-top: 80px; /* Space for fixed navbar */
+    font-weight: 300; /* Lighter default font weight */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 30px auto;
+    overflow: hidden;
+    padding: 30px 40px;
+    background: var(--white-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+/* --- Navigation --- */
+nav {
+    background: linear-gradient(90deg, var(--dark-color), #34495e); /* Gradient background */
+    color: var(--white-color);
+    padding: 0 20px; /* Add horizontal padding */
+    position: fixed; /* Fixed position */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    height: 65px; /* Fixed height */
+    display: flex;
+    align-items: center; /* Vertically center items */
+}
+
+nav .nav-container {
+    display: flex;
+    justify-content: space-between; /* Space out logo/links and user info */
+    align-items: center;
+    width: 100%;
+    max-width: 1200px; /* Max width to align with container */
+    margin: 0 auto; /* Center the nav content */
+}
+
+
+nav .logo {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: var(--white-color);
+    text-decoration: none;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+}
+
+nav ul li {
+    margin: 0 10px; /* Slightly reduced margin */
+}
+
+nav ul li a {
+    color: var(--white-color);
+    text-decoration: none;
+    padding: 8px 15px; /* Increased padding */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-radius: 5px;
+    font-weight: 400; /* Normal weight for links */
+}
+
+nav ul li a:hover, nav ul li a.active {
+    background-color: rgba(255, 255, 255, 0.2); /* Subtle background on hover */
+    color: var(--white-color); /* Keep color white */
+}
+
+/* User info display in nav */
+#user-info {
+    display: flex; /* Use flex for alignment */
+    align-items: center;
+    color: var(--light-color);
+    font-size: 0.95em;
+}
+
+#username-display {
+    margin-right: 15px;
+    font-weight: 600; /* Make username bold */
+}
+
+#logout-button {
+    background: var(--danger-color);
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 400;
+    transition: background-color 0.3s ease;
+}
+
+#logout-button:hover {
+    background: #c0392b; /* Darker red on hover */
+}
+
+
+/* --- Forms --- */
+form {
+    margin-top: 30px;
+    padding: 25px;
+    border: 1px solid #e0e0e0;
+    border-radius: var(--border-radius);
+    background-color: #fdfdfd; /* Slightly off-white background */
+}
+
+/* Forms not directly inside a .container might need their own top margin */
+body > form {
+     margin-top: 30px;
+}
+/* Forms directly inside a container often don't need extra top margin if container has padding */
+.container > form {
+    margin-top: 0; /* Adjust if needed based on structure */
+     padding: 0; /* Remove padding if container provides it */
+     border: none;
+     background: none;
+}
+/* Specific compiler form padding */
+#compiler-form {
+     padding: 0;
+     border: none;
+     background: none;
+     margin-top: 0;
+}
+
+
+form div {
+    margin-bottom: 20px; /* Increased spacing */
+}
+
+form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600; /* Bolder labels */
+    color: #555;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form select,
+form textarea {
+    width: 100%;
+    padding: 12px 15px; /* More padding */
+    border: 1px solid var(--grey-color);
+    border-radius: 5px; /* Softer corners */
+    font-size: 1em;
+    font-family: var(--font-family);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: var(--white-color);
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2); /* Subtle focus glow */
+}
+
+
+form textarea {
+    min-height: 150px;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace; /* Better monospace font */
+    line-height: 1.5;
+}
+
+/* --- Buttons --- */
+button, input[type="submit"], .button { /* Added .button class */
+    display: inline-block;
+    background: var(--secondary-color);
+    color: var(--white-color);
+    border: none;
+    padding: 12px 25px; /* More padding */
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: 600; /* Bolder text */
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    text-decoration: none; /* For .button links */
+    text-align: center;
+}
+button:disabled {
+    background-color: var(--grey-color);
+    cursor: not-allowed;
+    transform: none;
+}
+
+button:hover:not(:disabled), input[type="submit"]:hover, .button:hover {
+    background: #27ae60; /* Darker green */
+    transform: translateY(-1px); /* Slight lift */
+}
+button:active:not(:disabled), input[type="submit"]:active, .button:active {
+    transform: translateY(0px); /* Press down */
+}
+
+/* Specific Button variations */
+.button-primary {
+    background-color: var(--primary-color);
+}
+.button-primary:hover:not(:disabled) {
+    background-color: #2980b9; /* Darker blue */
+}
+.button-danger {
+    background-color: var(--danger-color);
+}
+.button-danger:hover:not(:disabled) {
+    background-color: #c0392b; /* Darker red */
+}
+.button-secondary {
+    background-color: var(--dark-color);
+}
+.button-secondary:hover:not(:disabled) {
+    background-color: #2c3e50e0;
+}
+
+
+/* --- Headings & Text --- */
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 20px;
+    color: var(--dark-color);
+    font-weight: 600;
+}
+h1 { font-size: 2.5em; font-weight: 700; margin-bottom: 25px;}
+h2 { font-size: 2em; }
+h3 { font-size: 1.5em; }
+
+p {
+    margin-bottom: 15px;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #2980b9; /* Darker blue on hover */
+    text-decoration: none; /* Usually no underline for modern look */
+}
+
+/* --- Messages & Alerts --- */
+.message {
+    padding: 15px;
+    margin-bottom: 20px; /* Use margin-bottom instead of margin */
+    border-radius: var(--border-radius);
+    font-weight: 400;
+    border: 1px solid transparent; /* Base border */
+}
+.error-message {
+    color: var(--danger-color);
+    background-color: #fdecea; /* Lighter red background */
+    border-color: #f8c6c1; /* Lighter red border */
+}
+.success-message {
+    color: #1c6c44; /* Darker green text */
+    background-color: #d4edda; /* Lighter green background */
+    border-color: #c3e6cb; /* Lighter green border */
+}
+.info-message {
+    color: #0c5464; /* Darker info blue text */
+    background-color: #d1ecf1; /* Lighter info blue background */
+    border-color: #bee5eb; /* Lighter info blue border */
+}
+
+
+/* --- Compiler Page Specific --- */
+.compiler-container > div:not(.output-section):not(.message) { /* Target form elements */
+    margin-bottom: 25px;
+}
+
+#code, #stdin { /* Style textareas like code editors */
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    background-color: #2d2d2d; /* Dark background */
+    color: #f0f0f0; /* Light text */
+    border: 1px solid #444;
+    caret-color: var(--primary-color); /* Cursor color */
+}
+
+#code:focus, #stdin:focus {
+     box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3); /* Keep focus style */
+     border-color: var(--primary-color);
+}
+
+#code {
+    min-height: 350px;
+}
+
+#stdin {
+    min-height: 100px;
+}
+
+.output-section {
+    margin-top: 30px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    border: 1px solid #e0e0e0;
+}
+
+.output-section h2 {
+    margin-bottom: 15px;
+    font-size: 1.4em;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 5px;
+    display: inline-block; /* Fit border to text */
+}
+
+.output-section h3 {
+    font-size: 1.1em;
+    color: #555;
+    margin-top: 15px;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+#output, #error-output, #compiler-message, #status {
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    white-space: pre-wrap;
+    background-color: var(--white-color);
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #e0e0e0;
+    margin-top: 5px;
+    min-height: 40px;
+    word-wrap: break-word;
+    font-size: 0.95em;
+    line-height: 1.6;
+}
+
+#error-output {
+    color: var(--danger-color);
+    background-color: #fff0f0;
+    border-color: #fcc;
+}
+#status {
+    font-size: 1em;
+    color: #333;
+    background: #e8f4fd; /* Light blue background for status */
+    border: 1px solid #c4e1f5;
+    font-weight: 600;
+}
+#compiler-message {
+    font-size: 0.9em;
+    color: #666;
+    background: #f0f0f0;
+    border: 1px solid #ddd;
+}
+
+/* --- Card Styling (for Snippets, Tutorials, Challenges) --- */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 25px; /* Space between cards */
+    margin-top: 20px;
+}
+
+.card {
+    background: var(--white-color);
+    border-radius: var(--border-radius);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    padding: 25px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.card h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+.card p {
+    color: #555;
+    font-size: 0.95em;
+    margin-bottom: 15px;
+    flex-grow: 1; /* Make paragraph take available space */
+}
+
+.card .language-tag {
+    display: inline-block;
+    background-color: var(--light-color);
+    color: var(--dark-color);
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    margin-right: 5px; /* Space between tags */
+    margin-bottom: 10px; /* Space below tags */
+    font-weight: 600;
+}
+
+.card .card-actions {
+    margin-top: auto; /* Push actions to the bottom */
+    padding-top: 15px; /* Space above actions */
+}
+
+.card .button {
+    margin-right: 10px;
+    padding: 8px 15px; /* Smaller buttons for cards */
+    font-size: 0.9em;
+}
+
+
+/* --- Snippet Modal Styles --- */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 2000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: 8% auto; /* Adjusted margin for better centering */
+    padding: 30px 40px; /* More padding */
+    border: 1px solid #888;
+    width: 85%; /* Slightly wider */
+    max-width: 850px; /* Max width */
+    border-radius: var(--border-radius);
+    box-shadow: 0 5px 25px rgba(0,0,0,0.3);
+    position: relative;
+}
+.modal-close {
+    color: #aaa;
+    position: absolute;
+    top: 15px; /* Adjusted position */
+    right: 25px; /* Adjusted position */
+    font-size: 32px; /* Slightly larger */
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1; /* Ensure consistent height */
+}
+.modal-close:hover,
+.modal-close:focus {
+    color: black;
+    text-decoration: none;
+}
+/* Ensure modal form elements inherit base styles */
+.modal-content form {
+     margin-top: 20px;
+     padding: 0;
+     border: none;
+     background: none;
+}
+#modal-code { /* Style modal textarea like editor */
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    background-color: #2d2d2d; color: #f0f0f0; border: 1px solid #444;
+    min-height: 250px; width: 100%; padding: 10px; border-radius: 5px;
+    margin-top: 10px; /* Space above code area */
+    line-height: 1.5;
+}
+#modal-language { /* Readonly field styling */
+    background-color: #eee;
+    cursor: not-allowed;
+}
+
+
+/* --- Attempt Challenge Page Layout --- */
+.challenge-layout {
+    display: flex;
+    gap: 30px;
+}
+.challenge-description {
+    flex: 1; /* Takes up space */
+    max-width: 40%; /* Limit width */
+    border-right: 1px solid var(--grey-color);
+    padding-right: 30px;
+    max-height: 80vh; /* Limit height */
+    overflow-y: auto; /* Allow scrolling */
+    padding-bottom: 20px; /* Padding at bottom when scrolling */
+}
+.challenge-compiler {
+    flex: 2; /* Takes more space */
+}
+.challenge-description h2, .challenge-compiler h2 {
+    margin-top: 0; /* Remove extra top margin */
+}
+#challenge-examples, #challenge-constraints {
+    background:#f0f2f5;
+    padding:15px;
+    border-radius:5px;
+    border: 1px solid #e0e4e8;
+    white-space: pre-wrap; /* Wrap text */
+    font-size: 0.9em;
+    line-height: 1.6;
+}
+
+
+/* --- Utility Classes --- */
+.hidden {
+    display: none !important; /* Use important to override potential conflicts */
+}
+
+.text-center {
+    text-align: center;
+}
+
+.mt-1 { margin-top: 1rem !important; }
+.mt-2 { margin-top: 2rem !important; }
+.mb-1 { margin-bottom: 1rem !important; }
+.mb-2 { margin-bottom: 2rem !important; }
+
+/* --- Responsive Design --- */
+@media (max-width: 992px) { /* Tablet breakpoint */
+     .challenge-layout {
+        flex-direction: column;
+    }
+     .challenge-description {
+        max-width: 100%;
+        border-right: none;
+        padding-right: 0;
+        border-bottom: 1px solid var(--grey-color);
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+        max-height: 50vh; /* Adjust height */
+    }
+    .modal-content {
+        width: 90%;
+        margin: 5% auto;
+    }
+}
+
+
+@media (max-width: 768px) { /* Mobile breakpoint */
+    body {
+        padding-top: 65px; /* Adjust if nav wraps */
+    }
+
+    nav .nav-container {
+        flex-wrap: wrap; /* Allow wrapping */
+        justify-content: center;
+    }
+    nav .logo {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 10px; /* Space below logo */
+    }
+    nav ul {
+        /* Removed flex-direction column for potential better fit */
+        justify-content: center;
+        flex-wrap: wrap; /* Allow menu items to wrap */
+        width: 100%;
+        margin-top: 5px;
+    }
+     nav ul li {
+        margin: 3px 5px; /* Adjust margin for wrapped items */
+    }
+     nav ul li a {
+        padding: 6px 10px; /* Smaller padding on mobile */
+    }
+    #user-info {
+        margin-top: 10px;
+        width: 100%;
+        justify-content: center;
+        font-size: 0.9em;
+    }
+
+    h1 { font-size: 2em; }
+    h2 { font-size: 1.6em; }
+
+    .container {
+        padding: 20px;
+        margin: 20px auto;
+    }
+
+    .card-container {
+        grid-template-columns: 1fr; /* Stack cards on small screens */
+    }
+     .modal-content {
+        width: 95%;
+        padding: 20px;
+    }
+     .modal-close {
+         top: 10px;
+         right: 15px;
+         font-size: 28px;
+     }
+}

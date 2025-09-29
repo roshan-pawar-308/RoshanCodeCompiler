@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Challenges - CodeLearnGrow</title>
+     <style> .modal { display: none; } </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+             <a href="index.html" class="logo">CodeLearnGrow</a>
+             <ul>
+                <li><a href="index.html">Home</a></li>
+                <li id="nav-compiler" class="hidden"><a href="compiler.html">Compiler</a></li>
+                <li id="nav-dashboard" class="hidden"><a href="dashboard.html">Dashboard</a></li>
+                <li id="nav-tutorials" class="hidden"><a href="tutorials.html">Tutorials</a></li>
+                <li id="nav-challenges" class="hidden"><a href="challenges.html" class="active">Challenges</a></li>
+                <li id="nav-snippets" class="hidden"><a href="snippets.html">My Snippets</a></li>
+                <li id="nav-login"><a href="login.html">Login</a></li>
+                <li id="nav-register"><a href="register.html">Register</a></li>
+            </ul>
+             <div id="user-info" class="hidden">
+                Welcome, <span id="username-display"></span>! <button id="logout-button">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Coding Challenges</h1>
+        <p>Select a challenge below to test your problem-solving skills.</p>
+
+         <div id="challenge-list" class="card-container mt-2">
+            <div class="card">
+                <h3>Two Sum Problem</h3>
+                <span class="language-tag">Arrays</span> <span class="language-tag">Easy</span>
+                <p>Given an array of integers, return indices of the two numbers such that they add up to a specific target.</p>
+                <div class="card-actions">
+                    <a href="attempt-challenge.html?id=two-sum" class="button button-primary">Attempt Challenge</a>
+                </div>
+            </div>
+             <div class="card">
+                <h3>Reverse a String</h3>
+                <span class="language-tag">Strings</span> <span class="language-tag">Easy</span>
+                <p>Write a function that reverses a string. The input string is given as an array of characters.</p>
+                 <div class="card-actions">
+                     <a href="attempt-challenge.html?id=reverse-string" class="button button-primary">Attempt Challenge</a>
+                </div>
+            </div>
+             <div class="card">
+                <h3>Validate Binary Search Tree</h3>
+                 <span class="language-tag">Trees</span> <span class="language-tag">Medium</span>
+                <p>Given the root of a binary tree, determine if it is a valid binary search tree (BST).</p>
+                 <div class="card-actions">
+                     <a href="attempt-challenge.html?id=validate-bst" class="button button-primary">Attempt Challenge</a>
+                </div>
+            </div>
+             </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

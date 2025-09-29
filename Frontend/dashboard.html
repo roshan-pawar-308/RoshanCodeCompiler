@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Dashboard - CodeLearnGrow</title>
+     <style> .modal { display: none; } </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+             <a href="index.html" class="logo">CodeLearnGrow</a>
+             <ul>
+                <li><a href="index.html">Home</a></li>
+                <li id="nav-compiler" class="hidden"><a href="compiler.html">Compiler</a></li>
+                <li id="nav-dashboard" class="hidden"><a href="dashboard.html" class="active">Dashboard</a></li>
+                <li id="nav-tutorials" class="hidden"><a href="tutorials.html">Tutorials</a></li>
+                <li id="nav-challenges" class="hidden"><a href="challenges.html">Challenges</a></li>
+                <li id="nav-snippets" class="hidden"><a href="snippets.html">My Snippets</a></li>
+                <li id="nav-login"><a href="login.html">Login</a></li>
+                <li id="nav-register"><a href="register.html">Register</a></li>
+            </ul>
+             <div id="user-info" class="hidden">
+                Welcome, <span id="username-display"></span>! <button id="logout-button">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+         <h1>Dashboard</h1>
+        <p style="font-size: 1.1em;">Welcome back, <strong class="username-display-body" style="color: var(--primary-color);">User</strong>! Ready to code?</p>
+        <p>Select an option below to get started:</p>
+
+        <div class="card-container mt-2">
+            <div class="card">
+                <h3>Compiler</h3>
+                <p>Compile and run code snippets in various languages instantly.</p>
+                <div class="card-actions">
+                    <a href="compiler.html" class="button button-primary">Go to Compiler</a>
+                </div>
+            </div>
+             <div class="card">
+                <h3>Tutorials</h3>
+                <p>Learn new programming concepts and techniques with our curated tutorials.</p>
+                <div class="card-actions">
+                    <a href="tutorials.html" class="button">Browse Tutorials</a>
+                </div>
+            </div>
+             <div class="card">
+                <h3>Challenges</h3>
+                <p>Test your skills and solve coding problems to sharpen your abilities.</p>
+                 <div class="card-actions">
+                    <a href="challenges.html" class="button">Practice Challenges</a>
+                </div>
+            </div>
+             <div class="card">
+                <h3>My Snippets</h3>
+                <p>Access and manage your saved code snippets for quick reference.</p>
+                 <div class="card-actions">
+                    <a href="snippets.html" class="button">View Snippets</a>
+                </div>
+            </div>
+             </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
